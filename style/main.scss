@@ -1,0 +1,72 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+/*************************************/
+// Core variables and mixins (not use in this pr)
+@import "../scss/bootstrap";
+/* - Control -*/
+$panelWidth: 270px;
+$panelHeight: 180px;
+$columnnumber: 1;
+/* -// -*/
+
+%hidecol {
+	/*display: none;*/
+	background: none !important;
+}
+
+@mixin flexco(){
+	display: flex;
+}
+$condition: 12; /* база 12 */  
+$my_width: $condition - $columnnumber;
+
+.box { 
+  @if $my_width != 0 {
+	&:nth-child(-1n+#{$my_width}){
+		@extend %hidecol;
+	}
+	
+  }
+  @else {
+		//@error "Unknown direction #{$my_width}.";
+		//@extend %wrongcol; 
+  }
+}
+body {
+    margin: 0;
+}
+.main { 
+	@include flexco();
+	flex-direction: row;
+	flex-wrap: wrap;
+	/*flex-direction: column;*/
+	justify-content:center;
+	align-items: center;
+	height: 900px;
+	min-height: 1200px;
+	background: url(../img/white_wall.png) repeat;
+	padding-top: 50px;
+}
+section {
+	@include flexco();
+	width: 600px;
+	flex-direction: column;
+	align-items: center;
+	border: 2px solid #3661A2;
+	box-sizing: border-box;
+	padding: 5px;
+	justify-content: space-around;
+	background: url(../img/brickwall.png) repeat;
+}
+.row {
+	background: url(../img/holl.jpg) no-repeat;
+	background-size: cover;
+}
+.box {
+	width: #{$panelWidth};
+	height: #{$panelHeight};
+	border: 2px solid #cecece; 
+	background: url(../img/armstrong.png) no-repeat;
+	background-size: cover;
+}
